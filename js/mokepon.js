@@ -2,11 +2,23 @@ function aleatorio(min,max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+var playerAttack; 
+
 function gameStarts() {
     let petSelection = document.getElementById("select-pet"); // Lee el html para obtener un elemento por ID
     petSelection.addEventListener("click", selectionPet);     // Agrega los eventos que ejecutan las acciones programadas    
 
+    let fireAttack = document.getElementById("Botton-Fire");
+    fireAttack.addEventListener("click", attackingFire);
+
+    let waterAttack = document.getElementById("Botton-Water");
+    waterAttack.addEventListener("click", attackingWater);
+
+    let earthAttack = document.getElementById("Botton-Earth");
+    earthAttack.addEventListener("click", attackingEarth);
 }
+
+// function
 
 function selectionPet() {
 
@@ -75,4 +87,32 @@ function petEnemy () {
     }
 }
 
+function attackingFire() {
+    playerAttack = "Fire"; 
+    alert(`You attack with ${playerAttack}`);
+    randomAttack()
+}
+
+function attackingWater() {
+    playerAttack = "Water"; 
+    alert(`You attack with ${playerAttack}`);
+    randomAttack()
+}
+
+function attackingEarth() {
+    playerAttack = "Earth"; 
+    alert(`You attack with ${playerAttack}`);   
+    randomAttack()
+}
+
+function randomAttack() {
+    var attackingRandom =  aleatorio(1,3);
+    if (attackingRandom == 1) {
+        alert("Enemy attack with Fire");
+    } else if (attackingRandom == 2) {
+        alert("Enemy attack with Water");
+    } else {
+        alert("Enemy attack with Earth");
+    }
+}
 window.addEventListener("load", gameStarts); // Crea el evento en Windows de que cargue la "página" primero
