@@ -1,8 +1,9 @@
+let playerAttack;
+let randomAttacking;
+
 function aleatorio(min,max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
-var playerAttack; 
 
 function gameStarts() {
     let petSelection = document.getElementById("select-pet"); // Lee el html para obtener un elemento por ID
@@ -17,8 +18,6 @@ function gameStarts() {
     let earthAttack = document.getElementById("Botton-Earth");
     earthAttack.addEventListener("click", attackingEarth);
 }
-
-// function
 
 function selectionPet() {
 
@@ -90,29 +89,56 @@ function petEnemy () {
 function attackingFire() {
     playerAttack = "Fire"; 
     alert(`You attack with ${playerAttack}`);
-    randomAttack()
+    randomAttack();
 }
 
 function attackingWater() {
     playerAttack = "Water"; 
     alert(`You attack with ${playerAttack}`);
-    randomAttack()
+    randomAttack();
 }
 
 function attackingEarth() {
     playerAttack = "Earth"; 
     alert(`You attack with ${playerAttack}`);   
-    randomAttack()
+    randomAttack();
 }
 
 function randomAttack() {
     var attackingRandom =  aleatorio(1,3);
+    
     if (attackingRandom == 1) {
-        alert("Enemy attack with Fire");
+        randomAttacking = "Fire";
     } else if (attackingRandom == 2) {
-        alert("Enemy attack with Water");
+        randomAttacking = "Water";
     } else {
-        alert("Enemy attack with Earth");
+        randomAttacking = "Earth";
+    }
+
+    fighting(); 
+}
+
+function fighting () {
+
+    if (playerAttack == randomAttacking) { 
+        fightResult("TIE!")                                              // HAHAHHAAH
+    } else if ( playerAttack == "Fire" && randomAttacking == "Earth") {
+        fightResult("WON!")
+    } else if (playerAttack == "Water" && randomAttacking == "Fire") {
+        fightResult("WON!")
+    } else if ( playerAttack == "Eart" && randomAttacking == "Water") {
+        fightResult("WON!")
+    } else {
+        fightResult("LOST!")
     }
 }
+
+function fightResult (result) {
+    let sectionMessage = document.getElementById("result-attack")
+    let paragraph = document.createElement("p"); 
+    paragraph.innerHTML = `Your pet attacked with ${playerAttack} and enemy pet attacked with ${randomAttacking} you ${result}` 
+    sectionMessage.appendChild(paragraph)
+}
+
+
 window.addEventListener("load", gameStarts); // Crea el evento en Windows de que cargue la "página" primero
