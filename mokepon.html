@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>MOKEPON</title>
+        <script src="js/mokepon.js"></script>
     </head>
 
     <body>
@@ -10,40 +11,45 @@
         
         <section id="seleccionar_mascota">
             <h2>CHOOSE YOUR PET</h2>
-            <select name="" id="">
-                <optgroup label="Water💧">
-                    <option value="hipodoge">Hipodoge</option>
-                </optgroup>
-                <optgroup label="Earth🌱">
-                    <option value="capipepo">Capipepo</option>
-                </optgroup>
-                <optgroup label="Fire🔥">
-                    <option value="ratigueya">Ratigueya</option>
-                </optgroup>
-                <optgroup label="Hybrid🌀">
-                    <option value="langostelvis">Langostelvis💧🔥</option>
-                    <option value="tucapalma">Tucapalma💧🌱</option>
-                    <option value="pydos">Pydos🌱🔥</option>
-                </optgroup>
-            </select>    
-            <button>Seleccionar</button>
+
+            <input type="radio" name="pet" id="hipodoge">  
+            <label for="hipodoge">Hipodoge💧</label> <br>
+
+            <input type="radio" name="pet" id="capipepo"> 
+            <label for="capipepo">Capipepo🌱</label> <br>
+
+            <input type="radio" name="pet" id="ratigueya">
+            <label for="ratigueya">Ratigueya🔥</label> <br>
+
+            <input type="radio" name="pet" id="langostelvis"> 
+            <label for="langostelvis">Langostelvis💧🔥</label> <br>
+
+            <input type="radio" name="pet" id="tucapalma"> 
+            <label for="tucapalma">Tucapalma💧🌱</label> <br>
+
+            <input type="radio" name="pet" id="Pydos">  
+            <label for="pydos">Pydos🌱🔥</label> <br> 
+            
+            <button id="select-pet">SELECT</button>
         </section>
 
         <section id="elige_ataque">
-            <h2>ELIGE TU ATAQUE</h2>
-            <p>Tu mascota tiene <span>3</span> vidas</p>
-            <p>La mascota del enemigo tiene <span>3</span> vidas</p>
-            <button>FUEGO 🔥</button>
-            <button>AGUA 💧</button>
-            <button>TIERRA 🌱</button>  
+            <h2>ATTACK!</h2>
+
+            <p>Your pet <span id="player-pet"></span> has <span>3</span> lives</p>
+            <p>Enemy pet <span id="enemy-pet"></span> has <span>3</span> lives</p>
+
+            <button>FIRE 🔥</button>
+            <button>WATER 💧</button>
+            <button>EARTH 🌱</button>  
         </section>
 
         <section id="ATAQUES">
             <p>Tu mascota atacó con FUEGO y el enemigo atacó con TIERRA. ¡GANASTE!</p>
         </section>
 
-        <SEction id="reinicio">
-            <button>VOLVER  A JUGAR</button>
-        </SEction>
+        <Section id="reinicio">
+        <button>RESTART GAME</button>
+        </Section>
     </body>
 </html>
