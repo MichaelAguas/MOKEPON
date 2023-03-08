@@ -8,21 +8,33 @@ function aleatorio(min,max) {
 }
 
 function gameStarts() {
+    let sectionAttack = document.getElementById("choose-attack")
+    sectionAttack.style.display = "none"; 
+
+    let sectionRestart = document.getElementById("restarting")
+    sectionRestart.style.display = "none"; 
+
     let petSelection = document.getElementById("select-pet"); // Lee el html para obtener un elemento por ID
     petSelection.addEventListener("click", selectionPet);     // Agrega los eventos que ejecutan las acciones programadas    
 
     let fireAttack = document.getElementById("Botton-Fire");
     fireAttack.addEventListener("click", attackingFire);
-
     let waterAttack = document.getElementById("Botton-Water");
     waterAttack.addEventListener("click", attackingWater);
-
     let earthAttack = document.getElementById("Botton-Earth");
     earthAttack.addEventListener("click", attackingEarth);
+
+    let reloadGame = document.getElementById("restart-bottom")
+    reloadGame.addEventListener("click", restartGame)
 }
 
 function selectionPet() {
+    let sectionAttack = document.getElementById("choose-attack")
+    sectionAttack.style.display = "block"; 
 
+    let sectionPet = document.getElementById("pet-selection")
+    sectionPet.style.display = "none"; 
+    
     const $ = selector => document.getElementById(selector); 
     const play = 1; 
 
@@ -159,6 +171,9 @@ function checkinglives() {
     }
 }
 
+function restartGame() {
+    location.reload()
+}
 
 function fightResult (result) {
     let sectionMessage = document.getElementById("result-attack")
@@ -168,6 +183,17 @@ function fightResult (result) {
 }
 
 function fightFinalResult (finalResult) {
+    
+    let sectionRestart = document.getElementById("restarting")
+    sectionRestart.style.display = "block"; 
+
+    let fireAttack = document.getElementById("Botton-Fire")
+    fireAttack.disabled = true; 
+    let waterAttack = document.getElementById("Botton-Water")
+    waterAttack.disabled = true;
+    let earthAttack = document.getElementById("Botton-Earth")
+    earthAttack.disabled = true;
+
     let sectionMessage = document.getElementById("result-attack")
     let paragraph = document.createElement("h2"); 
     paragraph.innerHTML = finalResult; 
