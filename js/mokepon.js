@@ -1,5 +1,7 @@
 let playerAttack;
 let randomAttacking;
+let playerLives = 3; 
+let enemyLives = 3;  
 
 function aleatorio(min,max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -119,19 +121,44 @@ function randomAttack() {
 }
 
 function fighting () {
+    let spanAlyLives = document.getElementById("pet-lives"); 
+    let spanEnemyLives = document.getElementById("enemy-lives"); 
+
 
     if (playerAttack == randomAttacking) { 
-        fightResult("TIE!")                                              // HAHAHHAAH
+        fightResult("TIE!");                                             // HAHAHHAAH
     } else if ( playerAttack == "Fire" && randomAttacking == "Earth") {
-        fightResult("WON!")
+        fightResult("WON!");
+        enemyLives--
+        spanEnemyLives.innerHTML = enemyLives;
+
     } else if (playerAttack == "Water" && randomAttacking == "Fire") {
-        fightResult("WON!")
+        fightResult("WON!");
+        enemyLives--
+        spanEnemyLives.innerHTML = enemyLives;
+
     } else if ( playerAttack == "Eart" && randomAttacking == "Water") {
-        fightResult("WON!")
+        fightResult("WON!");
+        enemyLives--
+        spanEnemyLives.innerHTML = enemyLives;
+
     } else {
-        fightResult("LOST!")
+        fightResult("LOST!");
+        playerLives-- 
+        spanAlyLives.innerHTML = playerLives; 
+    }
+
+    checkinglives(); 
+}
+
+function checkinglives() {
+    if (playerLives == 0) {
+        fightFinalResult("YOU LOSE! ☠️")
+    } else if (enemyLives == 0) {
+        fightFinalResult("YOU WIN! 🔥")
     }
 }
+
 
 function fightResult (result) {
     let sectionMessage = document.getElementById("result-attack")
@@ -140,5 +167,11 @@ function fightResult (result) {
     sectionMessage.appendChild(paragraph)
 }
 
+function fightFinalResult (finalResult) {
+    let sectionMessage = document.getElementById("result-attack")
+    let paragraph = document.createElement("h2"); 
+    paragraph.innerHTML = finalResult; 
+    sectionMessage.appendChild(paragraph)
+}
 
 window.addEventListener("load", gameStarts); // Crea el evento en Windows de que cargue la "página" primero
