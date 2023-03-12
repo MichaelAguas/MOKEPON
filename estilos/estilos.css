@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 { 
+    font-size: 60px;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    color: #07236c;
+    background-image: url(/estilos/images/background.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+}
+
+#pet-selection {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#cards-pet { 
+    
+    display: flex;
+    gap: 10px;
+    
+}
+    
+#cards-pet #pet-card { 
+    background-color: #2838242b;
+    border-radius: 20px;
+    width: 274px;
+    height: 150px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 14px;
+    color: white;
+}
+
+#cards-pet img {
+    height: 134px;
+    width: 146px;
+}
+
+#select-pet { 
+    cursor: pointer;
+    width: 200px;
+    height: 45px;
+    border-radius: 20px;
+    background: transparent;
+    border: 3px solid #07236c;
+    color: black;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+
+}
+
