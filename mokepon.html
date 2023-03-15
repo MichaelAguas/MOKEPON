@@ -37,21 +37,39 @@
         </section>
 
         <section id="choose-attack">
-            <h2>ATTACK!</h2>
 
-            <p>Your pet <span id="player-pet"></span> has <span id="pet-lives">3</span> lives</p>
-            <p>Enemy pet <span id="enemy-pet"></span> has <span id="enemy-lives">3</span> lives</p>
+            <h2 id="choose-title">SELECT YOUR ATTACK</h2>
 
-            <button id="Botton-Fire">FIRE 🔥</button>
-            <button id="Botton-Water">WATER 💧</button>
-            <button id="Botton-Earth">EARTH 🌱</button>  
-        </section>
 
-        <section id="result-attack">
-        </section>
+            <div id="select-attack">
+                <button id="Botton-Fire">FIRE 🔥</button>
+                <button id="Botton-Water">EARTH 🌱</button>
+                <button id="Botton-Earth">WATER 💧</button>  
+            </div>  
+
+            <section id="cards-players">
+
+                <div id="card-player"> 
+                    <span class="lives" id="pet-lives">3</span>
+                    <p>Your pet <span id="player-pet"></span></p>
+
+                    <p id="pet-attack"></p>     
+                </div>
+    
+                <div id="card-enemy">
+                    <span class="lives" id="enemy-lives">3</span>
+                    <p>Enemy pet <span id="enemy-pet"></span></p>
+                    <p id="enemy-attack"></p>
+    
+                </div>
+            </section>
+
+            <section id="result-attack"></section>
 
         <Section id="restarting">
-        <button id="restart-bottom">RESTART GAME</button>
+            <button id="restart-bottom">RESTART GAME</button>
         </Section>
+
+
     </body>
 </html>

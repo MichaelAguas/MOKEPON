@@ -30,7 +30,7 @@ function gameStarts() {
 
 function selectionPet() {
     let sectionAttack = document.getElementById("choose-attack")
-    sectionAttack.style.display = "block"; 
+    sectionAttack.style.display = "flex"; 
 
     let sectionPet = document.getElementById("pet-selection")
     sectionPet.style.display = "none"; 
@@ -176,10 +176,18 @@ function restartGame() {
 }
 
 function fightResult (result) {
-    let sectionMessage = document.getElementById("result-attack")
-    let paragraph = document.createElement("p"); 
-    paragraph.innerHTML = `Your pet attacked with ${playerAttack} and enemy pet attacked with ${randomAttacking} you ${result}` 
-    sectionMessage.appendChild(paragraph)
+
+    let petAttack = document.getElementById("pet-attack");
+    let enemyAttack = document.getElementById("enemy-attack");
+
+    let spellPet = document.createElement("p"); 
+    let spellEnemy = document.createElement("p");
+   
+    spellPet.innerHTML = `Attack ${playerAttack}`;
+    spellEnemy.innerHTML = `Attack ${randomAttacking}`;
+
+    petAttack.appendChild(spellPet);
+    enemyAttack.appendChild(spellEnemy);
 }
 
 function fightFinalResult (finalResult) {
