@@ -15,6 +15,7 @@ body {
     color: #07236c;
     background-image: url(/estilos/images/background.jpg);
     background-size: cover;
+    background-repeat: no-repeat;
 
 }
 
@@ -82,8 +83,8 @@ body {
 }
 
 #select-attack { 
-    gap: 30px;
     display: flex;
+    gap: 30px;
 }
 
 #select-attack button { 
@@ -100,24 +101,52 @@ body {
 }
 
 #cards-players {
-    gap: 30px;
     display: flex;
-
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
 }
 
-#cards-players div {
+#cards-players .card-pet { 
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
-    height: 300px;
-    width: 300px;
-    background: #ffffffa8;
+    padding: 16px;
+    background: #e39d7c;
+    color: white;
     box-shadow: 1px 2px 6px 3px #443e3e;
-    color: #990000;
-    font-size: 14px;
+    border-radius: 20px;
 }
 
+#cards-players .card-pet img {
+    height: 148px;
+    width: 148px;
+}
+
+#cards-players #sec-battle {
+    display: flex;
+    height: 270px;
+    width: 448px;
+    background: #fffaf7;
+    box-shadow: 1px 2px 6px 3px #443e3e;
+    border-radius: 20px;
+    color: #900;
+    font-size: 20px;
+    justify-content: space-around;
+    align-items: center;
+}  
+
+#cards-players #sec-battle #battle #enemy-attack { 
+    font-size: 134px;
+
+}
+
+#cards-players .battle { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 #cards-players div  > span  {
     font-size: 48px;
@@ -132,13 +161,29 @@ body {
 }
 
 #restart-bottom { 
-   cursor: pointer;
+    cursor: pointer;
     width: 248px;
     height: 44px;
     border-radius: 20px;
-    background: #8b6a07;
+    background: #e11d1d;;
     box-shadow: 1px 2px 6px 3px black;
     color: #F7F1E5;
     font-family: 'Press Start 2P', cursive;
     font-size: 18px;
+}
+
+@media (max-width: 360px) {
+
+    #cards-pet {
+        flex-direction: column;
+    }
+
+    #select-attack { 
+        flex-direction: column;
+    }
+
+    #cards-players {
+        flex-direction: column;
+    }
+
 }

@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>MOKEPON</title>
-        <script src="js/mokepon.js"></script>
         <link rel="stylesheet" href="/estilos/estilos.css">
     </head>
 
@@ -14,62 +14,44 @@
 
             <h2 id="choose-pet">CHOOSE YOUR PET</h2>
 
-            <section id="cards-pet">
-                <input type="radio" name="pet" id="hipodoge">  
-                <label class="pet-card" id="pet-card" for="hipodoge">
-                    <p>Hipodoge</p>
-                    <img src="/estilos/images/hipodoge.png" alt="Hipodoge💧">
-                </label>
-    
-                <input type="radio" name="pet" id="capipepo"> 
-                <label id="pet-card" for="capipepo">
-                    <p>Capipepo</p>
-                    <img src="/estilos/images/capipepo.png" alt="Capipepo🌱">
-                </label>
-    
-                <input type="radio" name="pet" id="ratigueya">
-                <label id="pet-card" for="ratigueya">
-                    <p>Ratigueya</p>
-                    <img src="/estilos/images/ratigueya.png" alt="Ratigueya🔥">
-                </label>
-            </section>
+            <section id="cards-pet"></section> 
             <button id="select-pet">SELECT</button>
         </section>
 
         <section id="choose-attack">
 
             <h2 id="choose-title">SELECT YOUR ATTACK</h2>
-
-
-            <div id="select-attack">
-                <button id="Botton-Fire">FIRE 🔥</button>
-                <button id="Botton-Water">EARTH 🌱</button>
-                <button id="Botton-Earth">WATER 💧</button>  
-            </div>  
+            
+            <div id="select-attack"></div>  
 
             <section id="cards-players">
-
-                <div id="card-player"> 
-                    <span class="lives" id="pet-lives">3</span>
-                    <p>Your pet <span id="player-pet"></span></p>
-
-                    <p id="pet-attack"></p>     
+                
+                <div class="card-pet"> 
+                    <p><span id="player-pet"></span></p>
+                    <div id="image-div"></div>        
                 </div>
+
+                <section id="sec-battle">
+                    <div class="battle">
+                        <span class="lives" id="pet-lives">0</span>
+                        <p id="pet-attack"></p> 
+                    </div>
+                    <div id="result"></div> 
+                    <div class="battle">
+                        <span class="lives" id="enemy-lives">0</span>
+                        <p id="enemy-attack"></p>  
+                    </div>  
+                </section>
     
-                <div id="card-enemy">
-                    <span class="lives" id="enemy-lives">3</span>
-                    <p>Enemy pet <span id="enemy-pet"></span></p>
-                    <p id="enemy-attack"></p>
-    
+                <div class="card-pet">
+                    <p><span id="enemy-pet"></span>
+                    <div id="ima-div"></div>
                 </div>
             </section>
-
             <section id="result-attack"></section>
-
-        <Section id="restarting">
-            <button id="restart-bottom">RESTART GAME</button>
-        </Section>
-
-
+            <Section id="restarting">
+                <button id="restart-bottom">RESTART GAME</button>
+            </Section>
+        <script src="js/mokepon.js"></script>
     </body>
 </html>

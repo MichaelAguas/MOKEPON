@@ -1,173 +1,273 @@
-let playerAttack;
-let randomAttacking;
-let playerLives = 3; 
-let enemyLives = 3;  
+const sectionAttack = document.getElementById("choose-attack");
+const sectionRestart = document.getElementById("restarting")
+const petSelection = document.getElementById("select-pet"); // Lee el html para obtener un elemento por ID
+const reloadGame = document.getElementById("restart-bottom");
+
+const sectionPet = document.getElementById("pet-selection");
+
+const $ = selector => document.getElementById(selector);  
+const checkedLangostelvis = $("langostelvis"); 
+const checkedTucapalma = $("tucapalma"); 
+const checkedPydos = $("Pydos"); 
+
+const imagePet = document.getElementById("image-div")
+const attacksContainer = document.getElementById("select-attack");
+const playerPet = document.getElementById("player-pet");
+
+const enemyPet = document.getElementById("enemy-pet");
+const imaPet = document.getElementById("ima-div")
+
+const spanAlyLives = document.getElementById("pet-lives"); 
+const spanEnemyLives = document.getElementById("enemy-lives"); 
+
+const petAttack = document.getElementById("pet-attack");
+const enemyAttack = document.getElementById("enemy-attack");
+const loseWin = document.getElementById("result")
+
+const sectionMessage = document.getElementById("result-attack");
+
+const cardsPet = document.getElementById("cards-pet");
+
+let checkedHipodoge; 
+let checkedCapipepo;
+let checkedRatigueya;
+let divTemplate; 
+
+let playerAttack = [];
+let randomAttacking = []; 
+let attackRandom;
+
+let fireAttack;
+let waterAttack;
+let earthAttack;
+let buttonsAttack = []
+let optionPlayer; 
+let optionEnemy;
+
+let playerVictories = 0; 
+let enemyVictories = 0;  
+
+let mokepones = []
+let optionPet; 
+let petPlayer;
+
+let attacksMokepon;
+
+class Mokepon { 
+    constructor(nombre, imagen, vida) {
+        this.name = nombre;
+        this.image = imagen;
+        this.life = vida; 
+        this.attacks = []; // Allow to fill with information
+    }
+}
+
+let hipodoge = new Mokepon("Hipodoge", "/estilos/images/hipodoge.png", 5 );
+let capipepo = new Mokepon("Capipepo", "/estilos/images/capipepo.png", 5);
+let ratigueya = new Mokepon("Ratigueya", "/estilos/images/ratigueya.png", 5);
+
+
+hipodoge.attacks.push( 
+    {attack: "💧", id: "Botton-Water"},
+    {attack: "💧", id: "Botton-Water"},
+    {attack: "💧", id: "Botton-Water"},
+    {attack: "🔥", id: "Botton-Fire"},
+    {attack: "🌱", id: "Botton-Earth"},
+)
+
+capipepo.attacks.push( 
+    {attack: "🌱", id: "Botton-Earth"},
+    {attack: "🌱", id: "Botton-Earth"},
+    {attack: "🌱", id: "Botton-Earth"},
+    {attack: "🔥", id: "Botton-Fire"},
+    {attack: "💧", id: "Botton-Water"},
+)
+
+ratigueya.attacks.push( 
+    {attack: "🔥", id: "Botton-Fire"},
+    {attack: "🔥", id: "Botton-Fire"},
+    {attack: "🔥", id: "Botton-Fire"},
+    {attack: "💧", id: "Botton-Water"},
+    {attack: "🌱", id: "Botton-Earth"},
+)
+
+mokepones.push(hipodoge, capipepo, ratigueya);
+
 
 function aleatorio(min,max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function gameStarts() {
-    let sectionAttack = document.getElementById("choose-attack")
     sectionAttack.style.display = "none"; 
-
-    let sectionRestart = document.getElementById("restarting")
     sectionRestart.style.display = "none"; 
 
-    let petSelection = document.getElementById("select-pet"); // Lee el html para obtener un elemento por ID
+    mokepones.forEach((mokepon) => {
+        optionPet = `
+        <input type="radio" name="pet" id=${mokepon.name}>  
+        <label class="pet-card" id="pet-card" for=${mokepon.name}>
+            <p>${mokepon.name}</p>
+            <img src=${mokepon.image} alt=${mokepon.name}>
+        </label>
+        `
+        cardsPet.innerHTML += optionPet
+
+        checkedHipodoge = $("Hipodoge");    
+        checkedCapipepo = $("Capipepo"); 
+        checkedRatigueya = $("Ratigueya")
+    })
+
     petSelection.addEventListener("click", selectionPet);     // Agrega los eventos que ejecutan las acciones programadas    
-
-    let fireAttack = document.getElementById("Botton-Fire");
-    fireAttack.addEventListener("click", attackingFire);
-    let waterAttack = document.getElementById("Botton-Water");
-    waterAttack.addEventListener("click", attackingWater);
-    let earthAttack = document.getElementById("Botton-Earth");
-    earthAttack.addEventListener("click", attackingEarth);
-
-    let reloadGame = document.getElementById("restart-bottom")
     reloadGame.addEventListener("click", restartGame)
 }
 
 function selectionPet() {
-    let sectionAttack = document.getElementById("choose-attack")
     sectionAttack.style.display = "flex"; 
-
-    let sectionPet = document.getElementById("pet-selection")
     sectionPet.style.display = "none"; 
-    
-    const $ = selector => document.getElementById(selector); 
-    const play = 1; 
 
-    let checkedHipodoge = $("hipodoge"); 
-    let checkedCapipepo = $("capipepo"); 
-    let checkedRatigueya = $("ratigueya"); 
-    let checkedLangostelvis = $("langostelvis"); 
-    let checkedTucapalma = $("tucapalma"); 
-    let checkedPydos = $("Pydos"); 
-    let playerPet = document.getElementById("player-pet");
 
     if (checkedHipodoge.checked) {
-        playerPet.innerHTML = "Hipodoge";
-        alert("You chose Hipodoge");
-
+        playerPet.innerHTML = checkedHipodoge.id;
+        imagePet.innerHTML = `<img src="${mokepones[0].image}" alt="${mokepones.name}">` 
+        petPlayer = checkedHipodoge.id
     } else if (checkedCapipepo.checked) {
-        playerPet.innerHTML = "Capipepo";
-        alert("You chose Capipepo");
-
+        playerPet.innerHTML = checkedCapipepo.id;
+        imagePet.innerHTML = `<img src="${mokepones[1].image}" alt="${mokepones.name}">` 
+        petPlayer = checkedCapipepo.id
     } else if (checkedRatigueya.checked) {
-        playerPet.innerHTML = "Ratigueya";
-        alert("You chose Ratigueya");
-
+        playerPet.innerHTML = checkedRatigueya.id;
+        imagePet.innerHTML = `<img src="${mokepones[2].image}" alt="${mokepones.name}">` 
+        petPlayer = checkedRatigueya.id
     } else if (checkedLangostelvis.checked) {
-        playerPet.innerHTML = "Langostelvis";
-        alert("You chose Langostelvis");
-
+        playerPet.innerHTML = checkedLangostelvis.id;
     } else if (checkedTucapalma.checked) {
-        playerPet.innerHTML = "Tucapalma";
-        alert("You chose Tucapalma");
-
+        playerPet.innerHTML = checkedTucapalma.id;  
     } else if (checkedPydos.checked) {
-        playerPet.innerHTML = "Pydos";
-        alert("You chose Pydos");
-        
+        playerPet.innerHTML = checkedPydos.id;
     } else {
         alert("You haven´t chosen a pet");
-        play = 0;
     }
 
-    if (play == 1) { 
-        petEnemy(); 
+    selectAttack(petPlayer)
+    petEnemy()
+}
+
+function selectAttack(petPlayer) {
+    let playerAttacks 
+    for (let i = 0; i < mokepones.length; i++) {
+        if (petPlayer === mokepones[i].name) { 
+            playerAttacks = mokepones[i].attacks;
+        }  
     }
+    showAttacks(playerAttacks)
+}
+
+function showAttacks(playerAttacks) {
+    playerAttacks.forEach((attack) => {
+        attacksMokepon = `<button class="bAttack" id=${attack.id}>${attack.attack}</button>`
+        attacksContainer.innerHTML += attacksMokepon
+    })
+
+    fireAttack = document.getElementById("Botton-Fire");
+    waterAttack = document.getElementById("Botton-Water");
+    earthAttack = document.getElementById("Botton-Earth");
+    buttonsAttack = document.querySelectorAll(".bAttack"); //CHOOSE THE ALL BUTTOM HERE
 }
 
 function petEnemy () {
-    
-    let randomPet = aleatorio(1,6);
-    let enemyPet = document.getElementById("enemy-pet");
+    let randomPet = aleatorio(0, mokepones.length -1);
 
-    if (randomPet == 1) {
-        enemyPet.innerHTML = "Hipodoge"; 
-    } else if (randomPet == 2) {
-        enemyPet.innerHTML = "Capipepo"; 
-    } else if (randomPet == 3) {
-        enemyPet.innerHTML = "Ratigueya";
-    } else if (randomPet == 4) {
-        enemyPet.innerHTML = "Langostevil";
-    } else if (randomPet == 5) {
-        enemyPet.innerHTML = "Tucapalma";
-    } else {
-        enemyPet.innerHTML= "Pydos";
-    }
+    enemyPet.innerHTML = mokepones[randomPet].name 
+    imaPet.innerHTML = `<img src="${mokepones[randomPet].image}" alt="${mokepones[randomPet].name}">` 
+    attackRandom = mokepones[randomPet].attacks
+    buttonInteraction()
 }
 
-function attackingFire() {
-    playerAttack = "Fire"; 
-    alert(`You attack with ${playerAttack}`);
-    randomAttack();
-}
-
-function attackingWater() {
-    playerAttack = "Water"; 
-    alert(`You attack with ${playerAttack}`);
-    randomAttack();
-}
-
-function attackingEarth() {
-    playerAttack = "Earth"; 
-    alert(`You attack with ${playerAttack}`);   
-    randomAttack();
+function buttonInteraction() {
+    buttonsAttack.forEach((button) => {
+        button.addEventListener("click", (e) => { //Dinamic adding eventListener
+            if (e.target.textContent === "🔥") {
+                playerAttack.push("🔥");
+                button.style.background = "#4c4242";
+                button.disabled = true;  
+            } else if (e.target.textContent === "💧") {
+                playerAttack.push("💧"); 
+                button.style.background = "#4c4242";
+                button.disabled = true;  
+            } else { 
+                playerAttack.push("🌱");
+                button.style.background = "#4c4242";
+                button.disabled = true;  
+            }
+            console.log(playerAttack); 
+            randomAttack()
+        })
+    })
 }
 
 function randomAttack() {
-    var attackingRandom =  aleatorio(1,3);
+    let attackingRandom =  aleatorio(0, attackRandom.length -1);
     
-    if (attackingRandom == 1) {
-        randomAttacking = "Fire";
-    } else if (attackingRandom == 2) {
-        randomAttacking = "Water";
+    if (attackingRandom == 0 || attackRandom == 1) {
+        randomAttacking.push("🔥"); 
+    } else if (attackingRandom == 3 || attackRandom == 4) {
+        randomAttacking.push("💧");
     } else {
-        randomAttacking = "Earth";
+        randomAttacking.push("🌱"); 
     }
+    console.log(randomAttacking);
+    startingGame()
+}
 
-    fighting(); 
+function startingGame(){
+    if (playerAttack.length === 5) { 
+        fighting()
+    }
+}
+
+function powerPlayers(player, pc) { 
+    optionPlayer = playerAttack[player];
+    optionEnemy = randomAttacking[pc];
 }
 
 function fighting () {
-    let spanAlyLives = document.getElementById("pet-lives"); 
-    let spanEnemyLives = document.getElementById("enemy-lives"); 
 
-
-    if (playerAttack == randomAttacking) { 
-        fightResult("TIE!");                                             // HAHAHHAAH
-    } else if ( playerAttack == "Fire" && randomAttacking == "Earth") {
-        fightResult("WON!");
-        enemyLives--
-        spanEnemyLives.innerHTML = enemyLives;
-
-    } else if (playerAttack == "Water" && randomAttacking == "Fire") {
-        fightResult("WON!");
-        enemyLives--
-        spanEnemyLives.innerHTML = enemyLives;
-
-    } else if ( playerAttack == "Eart" && randomAttacking == "Water") {
-        fightResult("WON!");
-        enemyLives--
-        spanEnemyLives.innerHTML = enemyLives;
-
-    } else {
-        fightResult("LOST!");
-        playerLives-- 
-        spanAlyLives.innerHTML = playerLives; 
+    for (let index = 0; index < playerAttack.length; index++) {
+        if (playerAttack[index] === randomAttacking[index]) {
+            powerPlayers(index, index);
+            fightResult("TIE!");                
+        } else if (playerAttack[index] === "🔥" && randomAttacking[index] === "🌱" ) {
+            powerPlayers(index, index);
+            playerVictories++ 
+            spanAlyLives.innerHTML = playerVictories;
+            fightResult("WON!");
+        } else if (playerAttack[index] === "💧" && randomAttacking[index] === "🔥") {
+            powerPlayers(index, index);
+            playerVictories++ 
+            spanAlyLives.innerHTML = playerVictories;
+            fightResult("WON!");
+        } else if (playerAttack[index] === "🌱" && randomAttacking[index] === "💧") {
+            powerPlayers(index, index);
+            playerVictories++ 
+            spanAlyLives.innerHTML = playerVictories;
+            fightResult("WON!");
+        } else  { 
+            powerPlayers(index, index);
+            enemyVictories++
+            spanEnemyLives.innerHTML = enemyVictories;
+            fightResult("LOSE!");
+        }
     }
-
     checkinglives(); 
 }
 
 function checkinglives() {
-    if (playerLives == 0) {
-        fightFinalResult("YOU LOSE! ☠️")
-    } else if (enemyLives == 0) {
+    if (playerVictories === enemyVictories) {
+        fightFinalResult("THAT´S TIE! ")
+    } else if (playerVictories > enemyVictories) {
         fightFinalResult("YOU WIN! 🔥")
+    } else  {
+        fightFinalResult("YOU LOSE! ☠️")
     }
 }
 
@@ -176,33 +276,21 @@ function restartGame() {
 }
 
 function fightResult (result) {
-
-    let petAttack = document.getElementById("pet-attack");
-    let enemyAttack = document.getElementById("enemy-attack");
-
     let spellPet = document.createElement("p"); 
     let spellEnemy = document.createElement("p");
-   
-    spellPet.innerHTML = `Attack ${playerAttack}`;
-    spellEnemy.innerHTML = `Attack ${randomAttacking}`;
+    // let howWin = document.createElement("p");
+    
+    spellPet.innerHTML = optionPlayer;
+    // howWin.innerHTML = result;
+    spellEnemy.innerHTML = optionEnemy;
 
     petAttack.appendChild(spellPet);
+    // loseWin.appendChild(howWin);
     enemyAttack.appendChild(spellEnemy);
 }
 
 function fightFinalResult (finalResult) {
-    
-    let sectionRestart = document.getElementById("restarting")
     sectionRestart.style.display = "block"; 
-
-    let fireAttack = document.getElementById("Botton-Fire")
-    fireAttack.disabled = true; 
-    let waterAttack = document.getElementById("Botton-Water")
-    waterAttack.disabled = true;
-    let earthAttack = document.getElementById("Botton-Earth")
-    earthAttack.disabled = true;
-
-    let sectionMessage = document.getElementById("result-attack")
     let paragraph = document.createElement("h2"); 
     paragraph.innerHTML = finalResult; 
     sectionMessage.appendChild(paragraph)
